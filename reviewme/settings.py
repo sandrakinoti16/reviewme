@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'reviewdeck',
     'pyuploadcare.dj',
+    'rest_framework',
 ]
 
 UPLOADCARE = {

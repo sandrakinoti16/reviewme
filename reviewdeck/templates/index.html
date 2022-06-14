@@ -1,25 +1,15 @@
-<html lang="en">
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
 <head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144351462-1"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'UA-144351462-1');
-    </script>
     <meta charset="UTF-8">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5850882928261471"
+     crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="shortcut icon" type="image/png" href="/static/images/favicon.ico">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/static/css/styles.css">
-    <title>ReviewDeck</title>
-     <script type="text/javascript" src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
 </head>
-<body>
 
+{% block content %}
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar" id="nbar">
     <div class="container">
         <a class="navbar-brand" href="/"> <strong class="mr-4 brand"> ReviewDeck</strong></a>
@@ -50,7 +40,6 @@
         </div>
     </div>
 </nav>
-
 <div class="container-fluid" style="margin-top:5%;">
     <div class="container-fluid">
         <!DOCTYPE html>
@@ -62,359 +51,153 @@
                 <div class="box-site-head js-single-element"
                      data-model="{&quot;likes&quot;:55,&quot;id&quot;:38186,&quot;images&quot;:{&quot;thumbnail&quot;:&quot;submissions\/2019\/10\/5da42f4e8967d075754281.jpg&quot;},&quot;slug&quot;:&quot;laguta-laguta&quot;,&quot;title&quot;:&quot;Laguta &amp; Laguta&quot;,&quot;createdAt&quot;:1571616000,&quot;tags&quot;:[&quot;Design Agencies&quot;,&quot;Mobile &amp; Apps&quot;,&quot;Web &amp; Interactive&quot;,&quot;Flat Design&quot;,&quot;Minimal&quot;,&quot;Portfolio&quot;,&quot;Responsive Design&quot;,&quot;Black&quot;,&quot;Red&quot;,&quot;White&quot;,&quot;Gallery&quot;,&quot;GSAP Animation&quot;,&quot;UI design&quot;,&quot;Nuxt.js&quot;],&quot;type&quot;:&quot;submission&quot;}">
                     <div class="box-bg has-tablet">
+                        <a href="{% url 'project' random_post.title %}">
                             <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAB2wAAAK8AQMAAAAZMt0LAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAANJJREFUeNrswYEAAAAAgKD9qRepAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABg9uBAAAAAAADI/7URVFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVWlPTgkAAAAABD0/7UzLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAKNogABue9NggAAAABJRU5ErkJggg=="
                                  width="1900" height="720" class="lazy"/>
                         </a>
                     </div>
                     <div class="box-content over mi" style="background-image:url(/static/images/download.jpeg)">
-                        
-            <div class="row mx-auto D-block">
-                <div class="by ">
-                    by <strong><a href="">awwards</a>
-                </strong> from <strong>Nairobi</strong>
+                        <a href="{% url 'project' random_post.title %}" class="site-link" aria-label=""></a>
+                        <div class="inner vertical-center">
+                            <div class="box-info">
+                                <div class="row mx-auto D-block">
+                                    <h2 class="heading-large"><a href="{% url 'project' random_post.title %}"
+                                                                 style="margin-top:-100px;">{{ random_post.title }}</a>
+                                    </h2>
+                                </div>
+                                <div class="row mx-auto D-block">
+                                    <div class="by ">
+                                        by <strong><a href="">{{ random_post.user.username }}</a>
+                                    </strong> from <strong>{{ random_post.user.profile.location }}</strong>
+                                    </div>
+                                </div>
+                                <div class="box-notesite js-notes">
+                                    <ul>
+                                        {% for rating in random_post.ratings.all %}
+                                        {% if forloop.counter is random_post.ratings.all.count %}
+                                        <li class="circle-note-progress style-design" data-note="">
+                                            <div class="circle">
+                                                <div class="des">
+                                                    <p class="d-block mx-auto textrate">{{rating.design_average}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="legend">DESIGN</div>
+                                        </li>
+                                        <li class="circle-note-progress style-usability"
+                                            data-note="{{rating.usability_average}}">
+                                            <div class="circle">
+                                                <div class="des1">
+                                                    <p class="d-block mx-auto textrate">{{rating.usability_average}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="legend">USABILITY</div>
+                                        </li>
+                                        <li class="circle-note-progress style-creativity"
+                                            data-note="{{rating.content_average}}">
+                                            <div class="circle">
+                                                 <div class="des2">
+                                                    <p class="d-block mx-auto textrate">{{rating.content_average}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="legend">CONTENT</div>
+                                        </li>
+                                        <li class="circle-note-progress style-content" data-note="{{ rating.score }}">
+                                            <div class="circle">
+                                                 <div class="des3">
+                                                    <p class="d-block mx-auto textrate">{{rating.score}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="legend">SCORE</div>
+                                        </li>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="box-breadcrumb">
+                                <div class="box-left">
+                                    <strong class="parent">
+                                        <a href="{% url 'project' random_post.title %}">Trending Site</a>
+                                    </strong>
+                                    <span class="text-x-thin">{{random_post.date|date}}</span>
+                                </div>
+                            </div>
+                            <div class="box-bl">
+                                <a href="{{random_post.url}}" data-identifier="" data-type="submission"
+                                   class="js-visit-item bt-default green-fill" target="_blank" rel="noopener nofollow"
+                                   style="margin-top:-60px;">Visit
+                                    Site</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="box-notesite js-notes">
-                <ul>
-                                        
-<li class="circle-note-progress style-design" data-note="">
-                    <div class="circle">
-                        <div class="des">
-                            <p class="d-block mx-auto textrate">7.62</p>
+        </section>
+        </body>
+        </html>
+    </div>
+
+    <div class="container">
+        <h2 class="mt-4">Websites available</h2>
+        {% if user.is_authenticated %}
+        <div class="modal fade bd-example-modal-xl" id="ModalCenter" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalCenterTitle"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Upload a project</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <input type="submit" class="btn btn-sm btn-info" value="Save"/>
+                            <button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="modal">Close
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <div class="row">
+            {% if posts %}
+
+            <div class="templates display">
+                {% for post in posts %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="view overlay">
+                            <img class="card-img-top" src="{{ post.photo.cdn_url }}"
+                                 alt="{{photo.title}}">
+                            <a href="{% url 'project' post.title %}">
+                                <div class="mask rgba-white-slight"></div>
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title"><a href="{% url 'project' post.title %}">{{post.title|title}}</a> <a
+                                    class="btn btn-sm btn-outline-info" href="{{ post.url }}" > View</a></h4>
+                            <hr>
+                            <p class="card-text "><img src="{{post.user.profile.profile_picture.url}}"
+                                                       class="nav-img mr-2"
+                                                       alt="">
+                                By {{post.user.username|title}} <span style="float:right">{{post.date|date}}</span>
+
+
+                            </p>
                         </div>
                     </div>
-                    <div class="legend">DESIGN</div>
-                </li>
-                <li class="circle-note-progress style-usability"
-                    data-note="8.23">
-                    <div class="circle">
-                        <div class="des1">
-                            <p class="d-block mx-auto textrate">8.23</p>
-                        </div>
-                    </div>
-                    <div class="legend">USABILITY</div>
-                </li>
-                <li class="circle-note-progress style-creativity"
-                    data-note="8.23">
-                    <div class="circle">
-                            <div class="des2">
-                            <p class="d-block mx-auto textrate">8.23</p>
-                        </div>
-                    </div>
-                    <div class="legend">CONTENT</div>
-                </li>
-                <li class="circle-note-progress style-content" data-note="8.03">
-                    <div class="circle">
-                            <div class="des3">
-                            <p class="d-block mx-auto textrate">8.03</p>
-                        </div>
-                    </div>
-                    <div class="legend">SCORE</div>
-                </li>
-                
-                
-            </ul>
+                </div>
+                {% endfor %}
+            </div>
+
+            {% endif %}
         </div>
     </div>
-    <div class="box-breadcrumb">
-        <div class="box-left">
-            <strong class="parent">
-                <a href="/project/Picture%20Globe">Trending Site</a>
-            </strong>
-            <span class="text-x-thin">Oct. 22, 2019</span>
-        </div>
-    </div>
-    <div class="box-bl">
-        <a href="https://picturesharen.herokuapp.com/" data-identifier="" data-type="submission"
-            class="js-visit-item bt-default green-fill" target="_blank" rel="noopener nofollow"
-            style="margin-top:-60px;">Visit
-            Site</a>
-    </div>
-</div>
-</div>
-</div>
-</div>
-</section>
-</body>
-</html>
 </div>
 
-<div class="container">
-<h2 class="mt-4">Websites available</h2>
-<div class="modal fade bd-example-modal-xl" id="ModalCenter" tabindex="-1" role="dialog"
-aria-labelledby="exampleModalCenterTitle"
-aria-hidden="true">
-<div class="modal-dialog modal-dialog-centered" role="document">
-<div class="modal-content">
-<div class="modal-header">
-<h5 class="modal-title" id="exampleModalLongTitle">Upload a project</h5>
-<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-</button>
-</div>
-<div class="modal-body">
-<form action="" method="post" enctype="multipart/form-data">
-    <input type="hidden" name="csrfmiddlewaretoken" value="1Jzky2AYTqwH47RQl4FJFjzvBP6gUn0Tbjoiq4E9bpJJy1A2r4eqo4dFehrbiiPV">
-    
-
-<div id="div_id_photo" class="form-group"> <div class=""> <input type="hidden" name="photo" role="uploadcare-uploader" data-public-key="2b709bca64245dd9e55e" data-integration="Django/2.2.6; PyUploadcare-Django/2.6.0" data-images-only="" class="filewidget form-control" required id="id_photo"> </div> </div> <div id="div_id_title" class="form-group"> <label for="id_title" class="col-form-label  requiredField">
-Title<span class="asteriskField">*</span> </label> <div class=""> <input type="text" name="title" maxlength="155" class="textinput textInput form-control" required id="id_title"> </div> </div> <div id="div_id_url" class="form-group"> <label for="id_url" class="col-form-label  requiredField">
-Url<span class="asteriskField">*</span> </label> <div class=""> <input type="url" name="url" maxlength="255" class="urlinput form-control" required id="id_url"> </div> </div> <div id="div_id_description" class="form-group"> <label for="id_description" class="col-form-label  requiredField">
-Description<span class="asteriskField">*</span> </label> <div class=""> <textarea name="description" cols="40" rows="10" maxlength="255" class="textarea form-control" required id="id_description">
-</textarea> </div> </div> <div id="div_id_technologies" class="form-group"> <label for="id_technologies" class="col-form-label ">
-Technologies
-</label> <div class=""> <input type="text" name="technologies" maxlength="200" class="textinput textInput form-control" id="id_technologies"> </div> </div>
-
-    <input type="submit" class="btn btn-sm btn-info" value="Save"/>
-    <button type="button" class="btn btn-outline-danger btn-sm" data-dismiss="modal">Close
-    </button>
-</form>
-</div>
-</div>
-</div>
-</div>
-<div class="row">
-
-
-<div class="templates display">
-
-<div class="col-md-4 mb-4">
-<div class="card">
-<div class="view overlay">
-    <img class="card-img-top" src="https://ucarecdn.com/321687cc-4ed7-477c-9691-19583c2e6c42/"
-            alt="">
-    <a href="/project/Bad%20Roads">
-        <div class="mask rgba-white-slight"></div>
-    </a>
-</div>
-<div class="card-body">
-    <h4 class="card-title"><a href="/project/Bad%20Roads">Bad Roads</a> <a
-            class="btn btn-sm btn-outline-info" href="https://www.awwwards.com/" style=""> View</a></h4>
-    <hr>
-    <p class="card-text "><img src="/media/default.png"
-                                class="nav-img mr-2"
-                                alt="">
-        By Kapla <span style="float:right">Oct. 25, 2020</span>
-
-
-    </p>
-</div>
-</div>
-</div>
-
-<div class="col-md-4 mb-4">
-<div class="card">
-<div class="view overlay">
-    <img class="card-img-top" src="https://ucarecdn.com/905ceb4a-eda3-4c77-b559-f21b06335033/"
-            alt="">
-    <a href="/project/Nature">
-        <div class="mask rgba-white-slight"></div>
-    </a>
-</div>
-<div class="card-body">
-    <h4 class="card-title"><a href="/project/Nature">Nature</a> <a
-            class="btn btn-sm btn-outline-info" href="http://127.0.0.1:2004/" style=""> View</a></h4>
-    <hr>
-    <p class="card-text "><img src="/media/default.png"
-                                class="nav-img mr-2"
-                                alt="">
-        By Nelly <span style="float:right">Jan. 13, 2020</span>
-
-
-    </p>
-</div>
-</div>
-</div>
-
-<div class="col-md-4 mb-4">
-<div class="card">
-<div class="view overlay">
-    <img class="card-img-top" src="https://ucarecdn.com/661698ce-28a9-4dff-af70-05be1c09be83/"
-            alt="">
-    <a href="/project/The%20strike">
-        <div class="mask rgba-white-slight"></div>
-    </a>
-</div>
-<div class="card-body">
-    <h4 class="card-title"><a href="/project/The%20strike">The Strike</a> <a
-            class="btn btn-sm btn-outline-info" href="https://jpeg.com" > View</a></h4>
-    <hr>
-    <p class="card-text "><img src="/media/images/cropped-graffik_logo_favicon.png"
-                                class="nav-img mr-2"
-                                alt="">
-        By Pip <span style="float:right">Nov. 24, 2019</span>
-
-
-    </p>
-</div>
-</div>
-</div>
-
-<div class="col-md-4 mb-4">
-<div class="card">
-<div class="view overlay">
-    <img class="card-img-top" src="https://ucarecdn.com/69366139-7a1c-4f55-99da-d2ce37cac53c/"
-            alt="">
-    <a href="/project/Portfolio%20website">
-        <div class="mask rgba-white-slight"></div>
-    </a>
-</div>
-<div class="card-body">
-    <h4 class="card-title"><a href="/project/Portfolio%20website">Portfolio Website</a> <a
-            class="btn btn-sm btn-outline-info" href="https://henrydru.herokuapp.com/" style=""> View</a></h4>
-    <hr>
-    <p class="card-text "><img src="/media/images/bqexfe2rmopidos6lqzv3rka3p7pzux5_hq.jpg"
-                                class="nav-img mr-2"
-                                alt="">
-        By Maritn_Dru <span style="float:right">Oct. 31, 2019</span>
-
-
-    </p>
-</div>
-</div>
-</div>
-
-<div class="col-md-4 mb-4">
-<div class="card">
-<div class="view overlay">
-    <img class="card-img-top" src="https://ucarecdn.com/8a455b18-fa00-4e80-b533-c437ab827984/"
-            alt="">
-    <a href="/project/Awwards">
-        <div class="mask rgba-white-slight"></div>
-    </a>
-</div>
-<div class="card-body">
-    <h4 class="card-title"><a href="/project/Awwards">Awwards</a> <a
-            class="btn btn-sm btn-outline-info" href="https://chawwards.herokuapp.com/" style=""> View</a></h4>
-    <hr>
-    <p class="card-text "><img src="/media/default.png"
-                                class="nav-img mr-2"
-                                alt="">
-        By Dexy <span style="float:right">Oct. 24, 2019</span>
-
-
-    </p>
-</div>
-</div>
-</div>
-
-<div class="col-md-4 mb-4">
-<div class="card">
-<div class="view overlay">
-    <img class="card-img-top" src="https://ucarecdn.com/83a580ac-662c-483f-9440-ac66f92878f5/"
-            alt="">
-    <a href="/project/Zawadi">
-        <div class="mask rgba-white-slight"></div>
-    </a>
-</div>
-<div class="card-body">
-    <h4 class="card-title"><a href="/project/Zawadi">Zawadi</a> <a
-            class="btn btn-sm btn-outline-info" href="https://Owiti-Charles.github.io/Portfolio" style=""> View</a></h4>
-    <hr>
-    <p class="card-text "><img src="/media/default.png"
-                                class="nav-img mr-2"
-                                alt="">
-        By Kayren <span style="float:right">Oct. 22, 2019</span>
-
-
-    </p>
-</div>
-</div>
-</div>
-
-<div class="col-md-4 mb-4">
-<div class="card">
-<div class="view overlay">
-    <img class="card-img-top" src="https://ucarecdn.com/100a7cfa-ddf4-40e1-98ef-bda30b68bba8/"
-            alt="">
-    <a href="/project/Github%20Search">
-        <div class="mask rgba-white-slight"></div>
-    </a>
-</div>
-<div class="card-body">
-    <h4 class="card-title"><a href="/project/Github%20Search">Github Search</a> <a
-            class="btn btn-sm btn-outline-info" href="https://owiti-charles.github.io/Git-Search/user-profile" style=""> View</a></h4>
-    <hr>
-    <p class="card-text "><img src="/media/images/av_IWPxHT9.png"
-                                class="nav-img mr-2"
-                                alt="">
-        By Wexy <span style="float:right">Oct. 22, 2019</span>
-
-
-    </p>
-</div>
-</div>
-</div>
-
-<div class="col-md-4 mb-4">
-<div class="card">
-<div class="view overlay">
-    <img class="card-img-top" src="https://ucarecdn.com/d43ba09c-56b6-4dbc-84a7-c50bc49ab711/"
-            alt="">
-    <a href="/project/Picture%20Globe">
-        <div class="mask rgba-white-slight"></div>
-    </a>
-</div>
-<div class="card-body">
-    <h4 class="card-title"><a href="/project/Picture%20Globe">Picture Globe</a> <a
-            class="btn btn-sm btn-outline-info" href="https://picturesharen.herokuapp.com/" style=""> View</a></h4>
-    <hr>
-    <p class="card-text "><img src="/media/default.png"
-                                class="nav-img mr-2"
-                                alt="">
-        By Awwards <span style="float:right">Oct. 22, 2019</span>
-
-
-    </p>
-</div>
-</div>
-</div>
-
-<div class="col-md-4 mb-4">
-<div class="card">
-<div class="view overlay">
-    <img class="card-img-top" src="https://ucarecdn.com/0ccf61ff-508e-46c6-b713-db51daa6626e/"
-            alt="">
-    <a href="/project/Instagram%20Clone">
-        <div class="mask rgba-white-slight"></div>
-    </a>
-</div>
-<div class="card-body">
-    <h4 class="card-title"><a href="/project/Instagram%20Clone">Instagram Clone</a> <a
-            class="btn btn-sm btn-outline-info" href="https://instalite.herokuapp.com/" style=""> View</a></h4>
-    <hr>
-    <p class="card-text "><img src="/media/default.png"
-                                class="nav-img mr-2"
-                                alt="">
-        By Awwards <span style="float:right">Oct. 22, 2019</span>
-
-
-    </p>
-</div>
-</div>
-</div>
-
-</div>
-
-
-</div>
-</div>
-</div>
-
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-<script type="text/javascript"
-src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/js/mdb.min.js"></script>
-<script src="https://assets.awwwards.com/dist/js/vendor.13df77655f5689a9b532.js" defer></script>
-<script src="https://assets.awwwards.com/dist/js/home.2734a967c43d3d4952c9.js" defer></script>
-<script>
-if('serviceWorker' in navigator) {
-window.addEventListener('load', function() {
-navigator.serviceWorker.register('/sw.js');
-});
-}
-</script>
-</body>
-</html>
+{% endblock %}
